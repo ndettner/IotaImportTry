@@ -3,8 +3,8 @@ import express, { Request, Response } from 'express';
 import morgan from 'morgan';
 import { WasmClientService } from "../lib/wasmclient/lib/index";
 import { Walletcontroller } from './controller/wallet.controller';
-import { configDotenv } from 'dotenv';
 import { FestivalController } from './controller/festival.controller';
+import dotenv from 'dotenv';
 
 
 class Server {
@@ -17,11 +17,10 @@ class Server {
 
     constructor() {
         this.app = express();
-        configDotenv();
+        dotenv.config();
         this.configuration();
         this.routes();
         this.initializeErrorHandling();
-
     }
 
     public configuration() {
