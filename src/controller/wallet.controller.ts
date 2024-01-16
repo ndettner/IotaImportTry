@@ -26,6 +26,9 @@ export class Walletcontroller {
     }
 
     private initializeClient = async () => {
+
+        console.log(process.env.TESTNET_API_SHIMMER);
+
         const client: Client = new Client({
             nodes: [process.env.TESTNET_API_SHIMMER as string],
         });
@@ -46,8 +49,17 @@ export class Walletcontroller {
 
     private initializeWallet = async () => {
         try {
-            const filePath = "process.env.STRONGHOLD_SNAPSHOT_PATH";
+            const filePath = process.env.STRONGHOLD_SNAPSHOT_PATH as string;
             if (fs.existsSync(filePath)) {
+                console.log("Im on the IF");
+
+                this.wallet = new Wallet({
+                    storagePath: process.env.WALLET_DB_PATH,
+                })
+
+            } else {
+                console.log("Im on the ELSE");
+
                 const walletOptions: WalletOptions = {
                     storagePath: process.env.WALLET_DB_PATH,
                     clientOptions: {
@@ -59,20 +71,18 @@ export class Walletcontroller {
                             snapshotPath: process.env.STRONGHOLD_SNAPSHOT_PATH,
                             password: process.env.STRONGHOLD_PASSWORD,
                         },
-                    },
-                };
+                    }
 
+                }
                 this.wallet = new Wallet(walletOptions);
 
                 await this.wallet.storeMnemonic(process.env.MNEMONIC as string)
 
-            } else {
-                this.wallet = new Wallet({
-                    storagePath: process.env.WALLET_DB_PATH,
-                })
             }
 
-        } catch (error) {
+        }
+
+        catch (error) {
             console.log(error);
         }
 

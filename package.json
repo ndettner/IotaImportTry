@@ -12,7 +12,6 @@
   "license": "ISC",
   "devDependencies": {
     "@types/express": "^4.17.21",
-    "@types/axios": "^0.14.0",
     "@types/morgan": "^1.9.9",
     "ts-sync-request": "^1.4.1",
     "typescript": "^5.3.3"
