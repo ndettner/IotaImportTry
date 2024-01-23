@@ -1,8 +1,6 @@
 import { Request, Response, Router } from "express";
 import { WalletService } from "../service/wallet.service";
 import dotenv from 'dotenv';
-import { Client, CoinType, Wallet, WalletOptions } from "@iota/sdk";
-import * as fs from "fs";
 
 export class Walletcontroller {
     public router: Router;

@@ -20,7 +20,6 @@ class Server {
         dotenv.config();
         this.configuration();
         this.routes();
-        this.initializeErrorHandling();
     }
 
     public configuration() {
@@ -66,10 +65,6 @@ class Server {
 
     }
 
-    public initializeErrorHandling() {
-        // TODO
-
-    }
 
     public start() {
         this.app.listen(this.app.get("port"), () => {
